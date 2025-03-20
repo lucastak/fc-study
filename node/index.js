@@ -17,7 +17,7 @@ connection.end()
 
 app.get('/', (req,res) => {
     res.send('<h1>Full Cycle</h1>')
-})
+}) 
 
 app.listen(port, ()=> {
     console.log('Rodando na porta ' + port)
