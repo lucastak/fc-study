@@ -7,7 +7,7 @@ const config = {
     password: 'root',
     database:'nodedb'
 };
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const connection = mysql.createConnection(config)
 
 const sql = `INSERT INTO people(name) values('Wesley')`
