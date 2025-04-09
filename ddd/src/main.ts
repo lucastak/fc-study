@@ -11,6 +11,6 @@ customer.activate();
 
 
 //eelacao Objeto - Entidade
-const item1 = new OrderItem("1", "Item 1", 100);
-const item2 = new OrderItem("2", "Item 2", 200);
+const item1 = new OrderItem("1", "Item 1", 10, 2, "p1");
+const item2 = new OrderItem("2", "Item 2", 15, 3, "p2");
 const order = new Order("1", customer.id, [item1, item2]);
