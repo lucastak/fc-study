@@ -21,37 +21,48 @@ describe("Order unit tests", () => {
   });
 
   it("should throw error when item id is empty", () => {
-    const orderItem = new OrderItem("", "Item 1", 10);
+    const orderItem = new OrderItem("", "Item 1", 10, 1);
     expect(() => {
       new Order("123", "123", [orderItem]);
     }).toThrowError("Item id is required");
   });
 
   it("should throw error when item name is empty", () => {
-    const orderItem = new OrderItem("1", "", 10);
+    const orderItem = new OrderItem("1", "", 10, 1);
     expect(() => {
       new Order("123", "123", [orderItem]);
     }).toThrowError("Item name is required");
   });
 
   it("should throw error when item price is zero or negative", () => {
-    const orderItem1 = new OrderItem("1", "Item 1", 0);
-    const orderItem2 = new OrderItem("2", "Item 2", -10);
+    const item1 = new OrderItem("1", "Item 1", 0, 1);
+    const item2 = new OrderItem("2", "Item 2", -10, 1);
 
-    expect(() => {
-      new Order("123", "123", [orderItem1]);
-    }).toThrowError("Item price must be greater than zero");
-
-    expect(() => {
-      new Order("123", "123", [orderItem2]);
-    }).toThrowError("Item price must be greater than zero");
+    expect(() => new Order("123", "123", [item1])).toThrowError(
+      "Item price must be greater than zero"
+    );
+    expect(() => new Order("123", "123", [item2])).toThrowError(
+      "Item price must be greater than zero"
+    );
   });
 
-  it("should calculate the total price of the order correctly", () => {
-    const orderItem1 = new OrderItem("1", "Item 1", 10);
-    const orderItem2 = new OrderItem("2", "Item 2", 15);
-    const order = new Order("123", "123", [orderItem1, orderItem2]);
+  it("should throw error when item quantity is zero or negative", () => {
+    const item1 = new OrderItem("1", "Item 1", 10, 0);
+    const item2 = new OrderItem("2", "Item 2", 15, -2);
 
-    expect(order.total()).toBe(25);
+    expect(() => new Order("123", "123", [item1])).toThrowError(
+      "Item quantity must be greater than zero"
+    );
+    expect(() => new Order("123", "123", [item2])).toThrowError(
+      "Item quantity must be greater than zero"
+    );
+  });
+
+  it("should calculate the total price of the order correctly with quantity", () => {
+    const item1 = new OrderItem("1", "Item 1", 10, 2); // 20
+    const item2 = new OrderItem("2", "Item 2", 15, 3); // 45
+    const order = new Order("123", "123", [item1, item2]);
+
+    expect(order.total()).toBe(65);
   });
 });
