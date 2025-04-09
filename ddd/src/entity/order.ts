@@ -10,4 +10,6 @@ export default class Order {
         this._id = id;
         this._customerId = customerId;
     }
+
+    
 }
