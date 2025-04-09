@@ -21,22 +21,22 @@ describe("Order unit tests", () => {
   });
 
   it("should throw error when item id is empty", () => {
-    const orderItem = new OrderItem("", "Item 1", 10, 1);
+    const orderItem = new OrderItem("", "Item 1", 10, 1, "p1");
     expect(() => {
       new Order("123", "123", [orderItem]);
     }).toThrowError("Item id is required");
   });
 
   it("should throw error when item name is empty", () => {
-    const orderItem = new OrderItem("1", "", 10, 1);
+    const orderItem = new OrderItem("1", "", 10, 1, "p1");
     expect(() => {
       new Order("123", "123", [orderItem]);
     }).toThrowError("Item name is required");
   });
 
   it("should throw error when item price is zero or negative", () => {
-    const item1 = new OrderItem("1", "Item 1", 0, 1);
-    const item2 = new OrderItem("2", "Item 2", -10, 1);
+    const item1 = new OrderItem("1", "Item 1", 0, 1, "p1");
+    const item2 = new OrderItem("2", "Item 2", -10, 1, "p2");
 
     expect(() => new Order("123", "123", [item1])).toThrowError(
       "Item price must be greater than zero"
@@ -47,8 +47,8 @@ describe("Order unit tests", () => {
   });
 
   it("should throw error when item quantity is zero or negative", () => {
-    const item1 = new OrderItem("1", "Item 1", 10, 0);
-    const item2 = new OrderItem("2", "Item 2", 15, -2);
+    const item1 = new OrderItem("1", "Item 1", 10, 0, "p1");
+    const item2 = new OrderItem("2", "Item 2", 15, -2, "p2");
 
     expect(() => new Order("123", "123", [item1])).toThrowError(
       "Item quantity must be greater than zero"
@@ -59,8 +59,8 @@ describe("Order unit tests", () => {
   });
 
   it("should calculate the total price of the order correctly with quantity", () => {
-    const item1 = new OrderItem("1", "Item 1", 10, 2); // 20
-    const item2 = new OrderItem("2", "Item 2", 15, 3); // 45
+    const item1 = new OrderItem("1", "Item 1", 10, 2, "p1");
+    const item2 = new OrderItem("2", "Item 2", 15, 3, "p2");
     const order = new Order("123", "123", [item1, item2]);
 
     expect(order.total()).toBe(65);

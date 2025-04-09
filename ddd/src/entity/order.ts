@@ -25,16 +25,16 @@ export default class Order {
       throw new Error("Items are required");
     }
     this._items.forEach((item) => {
-      if (item._id.length === 0) {
+      if (item.id.length === 0) {
         throw new Error("Item id is required");
       }
-      if (item._name.length === 0) {
+      if (item.name.length === 0) {
         throw new Error("Item name is required");
       }
-      if (item._price <= 0) {
+      if (item.price <= 0) {
         throw new Error("Item price must be greater than zero");
       }
-      if (item._quantity <= 0) {
+      if (item.quantity <= 0) {
         throw new Error("Item quantity must be greater than zero");
       }
     });
@@ -43,6 +43,6 @@ export default class Order {
   }
 
   total(): number {
-    return this._items.reduce((acc, item) => acc + item._price * item._quantity, 0);
+    return this._items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   }
 }
