@@ -1,16 +1,18 @@
-import Address from "./entity/address";
-import Customer from "./entity/customer";
-import Order from "./entity/order";
-import OrderItem from "./entity/order_item";
+import Address from "./domain/customer/value-object/address";
+import Customer from "./domain/customer/entity/customer";
+import Order from "./domain/checkout/entity/order";
+import OrderItem from "./domain/checkout/entity/order_item";
 
-//relacao - ID
-let customer = new Customer("1", "John Doe");
-const address = new Address("Street 1", 123, "123453-123", "City");
+const customer = new Customer("1234", "Lucas");
+const address = new Address("Rua 7 de Setembro", 137, "Rio de Janeiro", "10795-295");
+
+// ==> Agregado de ID
 customer.Address = address;
 customer.activate();
 
+// ==> Agregado de Objeto do Item
+const item1 = new OrderItem("1", "Item 1", 10, 2, "prodId-01");
+const item2 = new OrderItem("2", "Item 2", 15, 3, "prodId-03");
+const order = new Order("1", "1234", [item1, item2])
 
-//eelacao Objeto - Entidade
-const item1 = new OrderItem("1", "Item 1", 10, 2, "p1");
-const item2 = new OrderItem("2", "Item 2", 15, 3, "p2");
-const order = new Order("1", customer.id, [item1, item2]);
+console.log(order);
