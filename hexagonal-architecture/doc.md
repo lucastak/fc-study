@@ -1,4 +1,4 @@
 Comandos:
 
 docker-compose up -d
-docker exec -it appproduct bash
+docker exec -u root -it appproduct bash
