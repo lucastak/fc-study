@@ -37,7 +37,7 @@ describe("Test find customer use case", () => {
         const input = {
             id: "123",
         };
-        const output = useCase.execute(input)
+        const output = await useCase.execute(input)
         expect(output).toEqual({
             id: "123",
             name: "John Doe",
