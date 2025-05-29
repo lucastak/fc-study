@@ -13,6 +13,4 @@ customer.activate();
 // ==> Agregado de Objeto do Item
 const item1 = new OrderItem("1", "Item 1", 10, 2, "prodId-01");
 const item2 = new OrderItem("2", "Item 2", 15, 3, "prodId-03");
-const order = new Order("1", "1234", [item1, item2])
-
-console.log(order);
+const order = new Order("1", "1234", [item1, item2]);
