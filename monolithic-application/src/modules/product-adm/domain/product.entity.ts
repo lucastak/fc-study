@@ -38,12 +38,12 @@ export default class Product extends BaseEntity implements AggregateRoot {
         return this._stock;
     }
 
-    set stock(value: number) {
-        this._stock = value;
-    }
-
     get description(): string {
         return this._description;
+    }
+
+    set stock(value: number) {
+        this._stock = value;
     }
 
     set description(value: string) {
