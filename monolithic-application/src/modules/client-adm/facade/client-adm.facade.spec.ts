@@ -3,7 +3,7 @@ import { ClientModel } from "../repository/client.model";
 import ClientRepository from "../repository/client.repository";
 import AddClienteUseCase from "../use-case/add-client/add-client.usecase";
 import ClientAdmFacade from "./client-adm.facade";
-import FindClienteUseCase from "../use-case/find-client/find-client.usecase";
+import ClientAdmFacadeFactory from "../factory/client-adm.facade.factory";
 
 
 describe("ClientAdmFacade test", () => {
@@ -49,13 +49,7 @@ describe("ClientAdmFacade test", () => {
   });
 
   it("shoud find a client", async () => {
-    const repository = new ClientRepository();
-    const findUsecase = new FindClienteUseCase(repository);
-    const addUsecase = new AddClienteUseCase(repository);
-    const facade = new ClientAdmFacade({
-        addUsecase: addUsecase,
-        findUsecase: findUsecase
-    });
+    const facade = ClientAdmFacadeFactory.create();
 
     const input = {
       id: "1",
