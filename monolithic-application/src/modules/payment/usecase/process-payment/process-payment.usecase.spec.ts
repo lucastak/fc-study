@@ -24,7 +24,7 @@ const transactionDeclined = new Transaction({
 
 const MockRepositoryDeclined = () => {
     return {
-        save: jest.fn().mockReturnValue(Promise.resolve(transaction))
+        save: jest.fn().mockReturnValue(Promise.resolve(transactionDeclined))
     }
 };
 
