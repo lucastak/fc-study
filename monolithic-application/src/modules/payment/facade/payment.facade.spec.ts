@@ -1,41 +1,43 @@
 import { Sequelize } from "sequelize-typescript";
-import TransactionModel from "../repository/transaction.model";
-import TransactionRepository from "../repository/transaction.repository";
-import ProcessPaymentUseCase from "../usecase/process-payment/process-payment.usecase";
-import PaymentFacade from "./payment.facade";
 import PaymentFacadeFactory from "../factory/payment.facade.factory";
+import TransactionModel from "../repository/transaction.model";
 
-describe("PaymentFacade unit tests", () => {
-    let sequelize: Sequelize;
+describe("PaymentFacade test", () => {
+  let sequelize: Sequelize;
 
-    beforeEach(async () => {
-        sequelize = new Sequelize({
-            dialect: "sqlite",
-            storage: ":memory:",
-            logging: false,
-            sync: { force: true }
-        });
-
-        await sequelize.addModels([TransactionModel]);
-        await sequelize.sync();
+  beforeEach(async () => {
+    sequelize = new Sequelize({
+      dialect: "sqlite",
+      storage: ":memory:",
+      logging: false,
+      sync: { force: true },
     });
 
-    afterEach(async () => {
-        await sequelize.close();
-    });
+    await sequelize.addModels([TransactionModel]);
+    await sequelize.sync();
+  });
 
-    it("should create a payment", async () => {
-        const facade = PaymentFacadeFactory.create();
-        const input = {
-            orderId: "1",
-            amount: 100
-        }
+  afterEach(async () => {
+    await sequelize.close();
+  });
 
-        const result = await facade.process(input);
+  it("should create a transaction", async () => {
+    // const repository = new TransactionRepostiory();
+    // const usecase = new ProcessPaymentUseCase(repository);
+    // const facade = new PaymentFacade(usecase);
 
-        expect(result.transactionId).toBeDefined();
-        expect(result.orderId).toBe(input.orderId);
-        expect(result.amount).toBe(input.amount);
-        expect(result.status).toBe("approved");
-    });
+    const facade = PaymentFacadeFactory.create();
+
+    const input = {
+      orderId: "order-1",
+      amount: 100,
+    };
+
+    const output = await facade.process(input);
+
+    expect(output.transactionId).toBeDefined();
+    expect(output.orderId).toBe(input.orderId);
+    expect(output.amount).toBe(input.amount);
+    expect(output.status).toBe("approved");
+  });
 });

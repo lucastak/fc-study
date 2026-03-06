@@ -9,8 +9,8 @@ export default class ProductAdmFacadeFactory {
     const addProductUseCase = new AddProductUseCase(productRepository);
     const checkStockUseCase = new CheckStockUseCase(productRepository);
     const productFacade = new ProductAdmFacade({
-        addUseCase: addProductUseCase,
-        stockUseCase: checkStockUseCase,
+      addUseCase: addProductUseCase,
+      stockUseCase: checkStockUseCase,
     });
 
     return productFacade;
